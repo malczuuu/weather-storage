@@ -1,0 +1,21 @@
+### Reset mappings
+POST http://localhost:1080/__admin/mappings/reset
+Content-Type: application/json
+
+### Add mapping
+POST http://localhost:1080/__admin/mappings
+Content-Type: application/json
+
+{
+  "request": {
+    "method": "GET",
+    "urlPathPattern": "/users/[^/]+"
+  },
+  "response": {
+    "status": 200,
+    "jsonBody": {
+      "id": "{{request.pathSegments.[1]}}"
+    },
+    "transformers": ["response-template"]
+  }
+}

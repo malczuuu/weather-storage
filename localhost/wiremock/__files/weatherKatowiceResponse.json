@@ -1,0 +1,46 @@
+{
+  "coord": {
+    "lon": 19.0275,
+    "lat": 50.2584
+  },
+  "weather": [
+    {
+      "id": 804,
+      "main": "Clouds",
+      "description": "overcast clouds",
+      "icon": "04d"
+    }
+  ],
+  "base": "stations",
+  "main": {
+    "temp": 20.21,
+    "feels_like": 19.93,
+    "temp_min": 20.21,
+    "temp_max": 20.21,
+    "pressure": 1012,
+    "humidity": 63,
+    "sea_level": 1012,
+    "grnd_level": 981
+  },
+  "visibility": 10000,
+  "wind": {
+    "speed": 0.98,
+    "deg": 209,
+    "gust": 6.19
+  },
+  "clouds": {
+    "all": 100
+  },
+  "dt": 1752318598,
+  "sys": {
+    "type": 1,
+    "id": 1705,
+    "country": "PL",
+    "sunrise": 1752288412,
+    "sunset": 1752346305
+  },
+  "timezone": 7200,
+  "id": {{randomInt lower=10000000 upper=99999999}},
+  "name": "Katowice",
+  "cod": 200
+}

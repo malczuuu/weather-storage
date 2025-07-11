@@ -1,0 +1,4 @@
+openweathermap:
+  enabled: true
+  api:
+    url: http://localhost:1080

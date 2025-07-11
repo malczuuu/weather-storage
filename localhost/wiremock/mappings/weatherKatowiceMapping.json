@@ -1,0 +1,19 @@
+{
+  "request": {
+    "method": "GET",
+    "urlPathPattern": "/data/2.5/weather",
+    "queryParameters": {
+      "q": {
+        "equalTo": "Katowice",
+        "caseInsensitive": true
+      }
+    }
+  },
+  "response": {
+    "status": 200,
+    "bodyFileName": "weatherKatowiceResponse.json",
+    "headers": {
+      "Content-Type": "application/json"
+    }
+  }
+}

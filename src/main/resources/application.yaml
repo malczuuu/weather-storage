@@ -1,0 +1,18 @@
+server:
+  port: 8080
+
+spring:
+  application:
+    name: weather-storage
+  data:
+    mongodb:
+      uri: mongodb://localhost:27017/weather-storage
+
+openweathermap:
+  enabled: false
+  api:
+    url: https://api.openweathermap.org
+    token: verysecret
+    endpoint:
+      weather: ${openweathermap.api.url}/data/2.5/weather
+      forecast: ${openweathermap.api.url}/data/2.5/forecast
