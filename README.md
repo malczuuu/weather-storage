@@ -62,7 +62,7 @@ Prepare local environment based on `localhost/` subdirectory (and its [`docker-c
 >
 > Set this in `application.yaml` or set other configurations. See table below.
 >
-> | _application property_   | _JVM option_             | _environment variable_     |
+> | application property     | JVM option               | environment variable       |
 > |--------------------------|--------------------------|----------------------------|
 > | `openweathermap.enabled` | `OPENWEATHERMAP_ENABLED` | `-Dopenweathermap.enabled` |
 > | `openweathermap.api.url` | `OPENWEATHERMAP_API_URL` | `-Dopenweathermap.api.url` |
