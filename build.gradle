@@ -40,7 +40,7 @@ dependencies {
 
 spotless {
     format "misc", {
-        target "*.gradle"
+        target "*.gradle", ".gitattributes", ".gitignore"
 
         trimTrailingWhitespace()
         leadingTabsToSpaces(4)
