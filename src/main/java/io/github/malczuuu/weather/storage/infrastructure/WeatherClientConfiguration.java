@@ -1,4 +1,4 @@
-package io.github.malczuuu.weather.storage.infrastructure.weather;
+package io.github.malczuuu.weather.storage.infrastructure;
 
 import io.github.malczuuu.weather.storage.application.weather.WeatherClient;
 import lombok.extern.slf4j.Slf4j;

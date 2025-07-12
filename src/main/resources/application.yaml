@@ -8,6 +8,11 @@ spring:
     mongodb:
       uri: mongodb://localhost:27017/weather-storage
 
+weather:
+  scheduler:
+    initial-delay: 30s
+    fixed-delay: 30s
+
 openweathermap:
   enabled: false
   api:

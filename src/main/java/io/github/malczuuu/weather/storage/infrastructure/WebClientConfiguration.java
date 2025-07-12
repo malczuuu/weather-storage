@@ -1,4 +1,4 @@
-package io.github.malczuuu.weather.storage;
+package io.github.malczuuu.weather.storage.infrastructure;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;

@@ -1,4 +1,4 @@
-package io.github.malczuuu.weather.storage.infrastructure.scheduler;
+package io.github.malczuuu.weather.storage.infrastructure;
 
 import io.github.malczuuu.weather.storage.application.weather.WeatherProcessorImpl;
 import lombok.RequiredArgsConstructor;
@@ -13,7 +13,9 @@ public class WeatherScheduler {
 
   private final WeatherProcessorImpl weatherProcessor;
 
-  @Scheduled(initialDelayString = "30s", fixedDelayString = "30s")
+  @Scheduled(
+      initialDelayString = "${weather.scheduler.initial-delay}",
+      fixedDelayString = "${weather.scheduler.fixed-delay}")
   public void fetchWeather() {
     weatherProcessor
         .executeWeatherSync()
