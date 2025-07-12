@@ -62,6 +62,14 @@ spotless {
     }
 }
 
+/**
+ * There's no need for a plain JAR.
+ */
+tasks.named("jar") {
+    setEnabled(false)
+}
+
+
 tasks.named("test") {
     useJUnitPlatform()
 }
