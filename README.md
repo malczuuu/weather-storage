@@ -23,10 +23,15 @@ To summarize this exercise, following points were noted.
 2. See [`OpenWeatherMapWeatherClientTest`][OpenWeatherMapWeatherClientTest] test class to see how **WireMock** was
    configured for testing.
 
-   The different approach from `MongoDbContainer` setup is due to the fact that Spring Boot
-   testing library does not support **WireMock** out of the box.
+   The different approach from `MongoDbContainer` setup is due to the fact that Spring Boot testing library does not
+   support **WireMock** out of the box. See also [`OpenWeatherMapAware`][OpenWeatherMapAware] interface used for generic
+   `@DynamicPropertySource` of `openweathermap.api.url` to point to **WireMock**.
+3. See [`WeatherProcessorImplTest`][WeatherProcessorImplTest] test class to see how both **WireMock** and **MongoDB** is
+   used in tests.
 
-3. See [`docker-compose.yaml`][docker-compose.yaml] to see how **MongoDB** and **WireMock** were launched for local
+   Note that for MongoDB this test don't do anything, but [`OpenWeatherMapAware`][OpenWeatherMapAware] interface is
+   used explicitly.
+4. See [`docker-compose.yaml`][docker-compose.yaml] to see how **MongoDB** and **WireMock** were launched for local
    development. **Note** that **WireMock** allows static files loaded as Docker volumes for mock mappings.
 
 ## How It Works
@@ -91,9 +96,13 @@ installation is required.
 
 [openweathermap]: https://openweathermap.org/api
 
-[TestcontainersConfiguration]: src/test/java/io/github/malczuuu/weather/storage/_testcontainers/TestcontainersConfiguration.java
+[TestcontainersConfiguration]: src/test/java/io/github/malczuuu/weather/storage/testcontainers/TestcontainersConfiguration.java
 
 [OpenWeatherMapWeatherClientTest]: src/test/java/io/github/malczuuu/weather/storage/infrastructure/openweathermap/OpenWeatherMapWeatherClientTest.java
+
+[OpenWeatherMapAware]: src/test/java/io/github/malczuuu/weather/storage/infrastructure/testcontainers/OpenWeatherMapAware.java
+
+[WeatherProcessorImplTest]: src/test/java/io/github/malczuuu/weather/storage/application/weather/WeatherProcessorImplTest.java
 
 [docker-compose.yaml]: ./localhost/docker-compose.yaml
 
