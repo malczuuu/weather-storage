@@ -5,9 +5,12 @@ A simple [**Spring Boot**][spring-boot] application that periodically fetches we
 
 This project was created as a learning exercise to:
 
-- compare different alternatives to [**MockServer**][mockserver], because of its lack of updates since 2023. It was
-  decided to use [**WireMock**][wiremock] project simulate integrated APIs,
+- compare different alternatives to [**MockServer**][mockserver], because of its lack of updates since 2023,
 - explore [**Testcontainers**][testcontainers] for writing integration testing with **MongoDB** and **WireMock**.
+
+> **Note** that it was decided to use [**WireMock**][wiremock] project simulate integrated APIs, however
+> [`mockserver-neolight`][mockserver-neolight] project, which is a "slimmed-down" fork of the original project also
+> seems promising and has (somewhat limited) compatibility with it.
 
 ## Table of Contents
 
@@ -93,6 +96,8 @@ installation is required.
 [mockserver]: https://github.com/mock-server/mockserver
 
 [wiremock]: https://github.com/wiremock/wiremock
+
+[mockserver-neolight]: https://github.com/xdev-software/mockserver-neolight
 
 [openweathermap]: https://openweathermap.org/api
 
