@@ -30,7 +30,11 @@ public class ParameterEntity {
   public ParameterEntity() {}
 
   public ParameterEntity(String code, String value) {
-    this(null, code, List.of(value), null);
+    this(code, List.of(value));
+  }
+
+  public ParameterEntity(String code, List<String> value) {
+    this(null, code, value, null);
   }
 
   public ParameterEntity(String id, String code, List<String> values, Long version) {

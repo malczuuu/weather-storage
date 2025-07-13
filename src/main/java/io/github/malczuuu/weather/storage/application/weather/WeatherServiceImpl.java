@@ -16,6 +16,10 @@ public class WeatherServiceImpl implements WeatherService {
 
   @Override
   public Mono<Long> saveWeatherStream(Flux<WeatherModel> weatherStream) {
-    return weatherRepository.saveAll(weatherStream.mapNotNull(weatherMapper::toEntity)).count();
+    return weatherStream
+        .mapNotNull(weatherMapper::toEntity)
+        .as(weatherRepository::saveAll)
+        .count()
+        .defaultIfEmpty(0L);
   }
 }
