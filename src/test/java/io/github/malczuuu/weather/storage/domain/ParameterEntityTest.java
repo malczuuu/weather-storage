@@ -1,9 +1,6 @@
 package io.github.malczuuu.weather.storage.domain;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertFalse;
-import static org.junit.jupiter.api.Assertions.assertNull;
-import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 
 import java.util.List;
 import org.junit.jupiter.api.Test;
@@ -18,8 +15,8 @@ class ParameterEntityTest {
     boolean hasValue = entity.hasValue();
     String value = entity.getValue();
 
-    assertTrue(hasValue);
-    assertEquals("first", value);
+    assertThat(hasValue).isTrue();
+    assertThat(value).isEqualTo("first");
   }
 
   @Test
@@ -30,8 +27,8 @@ class ParameterEntityTest {
     boolean hasValue = entity.hasValue();
     String value = entity.getValue();
 
-    assertFalse(hasValue);
-    assertNull(value);
+    assertThat(hasValue).isFalse();
+    assertThat(value).isNull();
   }
 
   @Test
@@ -42,7 +39,7 @@ class ParameterEntityTest {
     boolean hasValue = entity.hasValue();
     String value = entity.getValue();
 
-    assertFalse(hasValue);
-    assertNull(value);
+    assertThat(hasValue).isFalse();
+    assertThat(value).isNull();
   }
 }

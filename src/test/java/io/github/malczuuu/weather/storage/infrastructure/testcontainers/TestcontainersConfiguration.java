@@ -1,6 +1,6 @@
-package io.github.malczuuu.weather.storage._testcontainers;
+package io.github.malczuuu.weather.storage.infrastructure.testcontainers;
 
-import static io.github.malczuuu.weather.storage._testcontainers.ContainerVersions.MONGO_VERSION;
+import static io.github.malczuuu.weather.storage.infrastructure.testcontainers.ContainerVersions.MONGO_IMAGE;
 
 import org.springframework.boot.test.context.TestConfiguration;
 import org.springframework.boot.testcontainers.service.connection.ServiceConnection;
@@ -14,6 +14,6 @@ public class TestcontainersConfiguration {
   @Bean
   @ServiceConnection
   public MongoDBContainer mongoDbContainer() {
-    return new MongoDBContainer(DockerImageName.parse("mongo:" + MONGO_VERSION));
+    return new MongoDBContainer(DockerImageName.parse(MONGO_IMAGE));
   }
 }

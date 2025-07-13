@@ -1,6 +1,6 @@
 package io.github.malczuuu.weather.storage;
 
-import io.github.malczuuu.weather.storage._testcontainers.TestcontainersConfiguration;
+import io.github.malczuuu.weather.storage.infrastructure.testcontainers.TestcontainersConfiguration;
 import org.springframework.boot.SpringApplication;
 
 public class TestApplication {

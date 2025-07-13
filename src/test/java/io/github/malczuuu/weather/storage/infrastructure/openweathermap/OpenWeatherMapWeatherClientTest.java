@@ -1,89 +1,46 @@
 package io.github.malczuuu.weather.storage.infrastructure.openweathermap;
 
-import static com.github.tomakehurst.wiremock.client.WireMock.*;
+import static io.github.malczuuu.weather.storage.infrastructure.openweathermap.OpenWeatherMapMocking.mockOpenWeatherMapApi;
+import static io.github.malczuuu.weather.storage.infrastructure.openweathermap.OpenWeatherMapMocking.resetOpenWeatherMap;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import io.github.malczuuu.weather.storage._testcontainers.TestcontainersConfiguration;
-import io.github.malczuuu.weather.storage._testcontainers.WireMockInstance;
-import io.github.malczuuu.weather.storage.application.weather.PressureModel;
-import io.github.malczuuu.weather.storage.application.weather.TemperatureModel;
 import io.github.malczuuu.weather.storage.application.weather.WeatherModel;
-import io.github.malczuuu.weather.storage.application.weather.WindModel;
-import java.time.Instant;
-import java.util.List;
+import io.github.malczuuu.weather.storage.infrastructure.testcontainers.OpenWeatherMapAware;
+import io.github.malczuuu.weather.storage.infrastructure.testcontainers.TestcontainersConfiguration;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.context.annotation.Import;
-import org.springframework.test.context.DynamicPropertyRegistry;
-import org.springframework.test.context.DynamicPropertySource;
-import org.springframework.web.reactive.function.client.WebClient;
-import org.wiremock.integrations.testcontainers.WireMockContainer;
+import org.springframework.test.context.ActiveProfiles;
 import reactor.core.publisher.Mono;
 import reactor.test.StepVerifier;
 
+@SpringBootTest
 @Import(TestcontainersConfiguration.class)
-@SpringBootTest(properties = "openweathermap.enabled=true")
-class OpenWeatherMapWeatherClientTest {
-
-  @Autowired private ObjectMapper objectMapper;
-  @Autowired private WebClient webClient;
+@ActiveProfiles({"test", "openweathermap"})
+class OpenWeatherMapWeatherClientTest implements OpenWeatherMapAware {
 
   @Autowired private OpenWeatherMapWeatherClient weatherClient;
 
-  @DynamicPropertySource
-  static void registerWireMockProps(DynamicPropertyRegistry registry) {
-    WireMockContainer wireMock = WireMockInstance.getInstance();
-    registry.add("openweathermap.api.url", wireMock::getBaseUrl);
-  }
+  @Autowired private ObjectMapper objectMapper;
 
   @Test
-  void execute() throws JsonProcessingException {
-    WeatherResponse owm = getOpenWeatherMapResponse();
-
-    stubFor(
-        get(urlPathEqualTo("/data/2.5/weather"))
-            .willReturn(okJson(objectMapper.writeValueAsString(owm))));
+  void givenOpenWeatherMapMocked_whenRetrievingWeather_shouldReturnWeather()
+      throws JsonProcessingException {
+    WeatherModel expectedWeather = mockOpenWeatherMapApi(objectMapper);
 
     Mono<WeatherModel> weather = weatherClient.getWeather("Krakow");
 
-    WeatherModel weatherModel = toWeatherModel(owm);
-    StepVerifier.create(weather).expectNext(weatherModel).expectComplete().verify();
+    StepVerifier.create(weather).expectNext(expectedWeather).verifyComplete();
   }
 
-  private static WeatherResponse getOpenWeatherMapResponse() {
-    return new WeatherResponse(
-        new Coord(19.9167, 50.0833),
-        List.of(new Weather(801L, "Clouds", "few clouds", "02d")),
-        "stations",
-        new Main(21.81, 21.43, 21.52, 22.44, 1013, 53, 1013, 983),
-        5000,
-        new Wind(2.57, 150, 2.33),
-        new Clouds(20),
-        1752317660L,
-        new Sys(2, 2090246L, "PL", 1752288248L, 1752346042L),
-        7200,
-        1L,
-        "Krakow",
-        200);
-  }
+  @Test
+  void givenOpenWeatherMapNotMocked_whenRetrievingWeather_shouldReturnEmptyStreamOfWeathers() {
+    resetOpenWeatherMap();
 
-  private static WeatherModel toWeatherModel(WeatherResponse owm) {
-    return new WeatherModel(
-        owm.name(),
-        owm.sys().country(),
-        owm.coord().lon(),
-        owm.coord().lat(),
-        owm.weather().getFirst().main(),
-        owm.weather().getFirst().description(),
-        owm.clouds().all(),
-        new TemperatureModel(
-            owm.main().temp(), owm.main().feelsLike(), owm.main().tempMin(), owm.main().tempMax()),
-        new PressureModel(owm.main().pressure(), owm.main().seaLevel(), owm.main().grndLevel()),
-        new WindModel(owm.wind().speed(), owm.wind().deg(), owm.wind().gust()),
-        Instant.ofEpochSecond(owm.dt()),
-        Instant.ofEpochSecond(owm.sys().sunrise()),
-        Instant.ofEpochSecond(owm.sys().sunset()));
+    Mono<WeatherModel> weather = weatherClient.getWeather("Krakow");
+
+    StepVerifier.create(weather).expectNextCount(0L).verifyComplete();
   }
 }
