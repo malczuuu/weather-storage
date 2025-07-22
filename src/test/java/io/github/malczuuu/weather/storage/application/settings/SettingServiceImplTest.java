@@ -1,7 +1,5 @@
 package io.github.malczuuu.weather.storage.application.settings;
 
-import static org.junit.jupiter.api.Assertions.*;
-
 import io.github.malczuuu.weather.storage.domain.ParameterRepository;
 import io.github.malczuuu.weather.storage.infrastructure.testcontainers.TestcontainersConfiguration;
 import org.junit.jupiter.api.Test;

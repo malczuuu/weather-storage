@@ -1,6 +1,10 @@
 package io.github.malczuuu.weather.storage.infrastructure.openweathermap;
 
-import io.github.malczuuu.weather.storage.application.weather.*;
+import io.github.malczuuu.weather.storage.application.weather.PressureModel;
+import io.github.malczuuu.weather.storage.application.weather.TemperatureModel;
+import io.github.malczuuu.weather.storage.application.weather.WeatherClient;
+import io.github.malczuuu.weather.storage.application.weather.WeatherModel;
+import io.github.malczuuu.weather.storage.application.weather.WindModel;
 import java.time.Instant;
 import java.util.List;
 import java.util.Map;

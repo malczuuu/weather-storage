@@ -6,7 +6,9 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import io.github.malczuuu.weather.storage.domain.*;
+import io.github.malczuuu.weather.storage.domain.ParameterRepository;
+import io.github.malczuuu.weather.storage.domain.WeatherEntity;
+import io.github.malczuuu.weather.storage.domain.WeatherRepository;
 import io.github.malczuuu.weather.storage.infrastructure.testcontainers.OpenWeatherMapAware;
 import io.github.malczuuu.weather.storage.infrastructure.testcontainers.TestcontainersConfiguration;
 import org.junit.jupiter.api.Test;
