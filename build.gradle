@@ -69,7 +69,6 @@ tasks.named("jar") {
     setEnabled(false)
 }
 
-
 tasks.named("test") {
     useJUnitPlatform()
 }
