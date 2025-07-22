@@ -8,12 +8,12 @@ This `docker-compose.yaml` sets up two services for local development and testin
 ## Table of Contents
 
 - [Services](#services)
-    - [MongoDB](#mongodb)
-    - [WireMock](#wiremock)
+  - [MongoDB](#mongodb)
+  - [WireMock](#wiremock)
 - [Usage](#usage)
-- [Tips for Development](#tips-for-development)
-    - [MongoDB](#mongodb)
-    - [WireMock](#wiremock)
+- [Development Tips](#development-tips)
+  - [MongoDB](#mongodb)
+  - [WireMock](#wiremock)
 
 ## Services
 
@@ -21,23 +21,23 @@ This `docker-compose.yaml` sets up two services for local development and testin
 
 - **Image:** [`mongo:8.0.6-noble`](https://hub.docker.com/_/mongo)
 - **Ports:** Exposes port `27017` on `127.0.0.1`
-- **Replica Set:** Configured as a single-node replica set (`rs0`) for enabling transactions and change streams
+- **Replica Set:** Configured as a single-node replica set (`rs0`) to enable transactions and change streams
 - **Volumes:**
-    - `mongo_data` → `/data/db`
-    - `mongo_config` → `/data/configdb`
+  - `mongo_data` → `/data/db`
+  - `mongo_config` → `/data/configdb`
 - **Healthcheck:**
-    - Automatically initializes the replica set if not yet initiated
-    - Uses `mongosh` to run a JavaScript command every 5 seconds, with a max of 30 retries
+  - Automatically initializes the replica set if not yet initiated
+  - Uses `mongosh` to run a JavaScript command every 5 seconds, with a maximum of 30 retries
 
 ### WireMock
 
 - **Image:** [`wiremock/wiremock:3.13.1-alpine`](https://hub.docker.com/r/wiremock/wiremock)
 - **Ports:** Exposes port `8080` as `127.0.0.1:1080`
 - **Volumes:**
-    - `./wiremock/__files` → Contains static response bodies (read-only)
-    - `./wiremock/mappings` → Contains mapping definitions (read-only)
+  - `./wiremock/__files` → Contains static response bodies (read-only)
+  - `./wiremock/mappings` → Contains mapping definitions (read-only)
 - **Command Flags:**
-    - `--global-response-templating` enables dynamic templating in response bodies
+  - `--global-response-templating` enables dynamic templating in response bodies
 
 ## Usage
 
@@ -56,26 +56,29 @@ docker compose logs -f
 **Stop the services:**
 
 ```bash
-docker-compose down
+docker compose down
 ```
 
 **Remove services with volumes:**
 
 ```bash
-docker-compose down -v
+docker compose down -v
 ```
 
-## Tips for Development
+## Development Tips
 
 ### MongoDB
 
-**Replica Set Check:**
+**Check Replica Set Status:**
 
-    docker exec -it <mongo_container_name> mongosh --eval "rs.status()"
-
+```bash
+docker exec -it <mongo_container_name> mongosh --eval "rs.status()"
+```
 **Connect using URI:**
 
-    mongodb://localhost:27017/?replicaSet=rs0
+```bash
+mongodb://localhost:27017/?replicaSet=rs0
+```
 
 ### WireMock
 

@@ -5,34 +5,34 @@ A simple [**Spring Boot**][spring-boot] application that periodically fetches we
 
 This project was created as a learning exercise to:
 
-- compare different alternatives to [**MockServer**][mockserver], because of its lack of updates since 2023,
-- explore [**Testcontainers**][testcontainers] for writing integration testing with **MongoDB** and **WireMock**.
+- compare different alternatives to [**MockServer**][mockserver], due to its lack of updates since 2023,
+- explore [**Testcontainers**][testcontainers] for writing integration tests with **MongoDB** and **WireMock**.
 
-> **Note** that it was decided to use [**WireMock**][wiremock] project simulate integrated APIs, however
-> [`mockserver-neolight`][mockserver-neolight] project, which is a "slimmed-down" fork of the original project also
+> **Note:** It was decided to use the [**WireMock**][wiremock] project to simulate integrated APIs. However,
+> the [`mockserver-neolight`][mockserver-neolight] project, a "slimmed-down" fork of the original, also
 > seems promising and has (somewhat limited) compatibility with it.
 
 ## Table of Contents
 
-- [Key Learning Points](#key-learning-points)
+- [Exercise Summary](#exercise-summary)
 - [How It Works](#how-it-works)
 - [Running the App](#running-the-app)
 
-## Key Learning Points
+## Exercise Summary
 
-To summarize this exercise, following points were noted.
+To summarize this exercise, the following points were noted:
 
-1. See [`TestcontainersConfiguration`][TestcontainersConfiguration] to see how MongoDB was configured for testing.
-2. See [`OpenWeatherMapWeatherClientTest`][OpenWeatherMapWeatherClientTest] test class to see how **WireMock** was
+1. See [`TestcontainersConfiguration`][TestcontainersConfiguration] for how MongoDB was configured for testing.
+2. See the [`OpenWeatherMapWeatherClientTest`][OpenWeatherMapWeatherClientTest] class to see how **WireMock** was
    configured for testing.
 
-   The different approach from `MongoDbContainer` setup is due to the fact that Spring Boot testing library does not
-   support **WireMock** out of the box. See also [`OpenWeatherMapAware`][OpenWeatherMapAware] interface used for generic
+   The different approach from the `MongoDbContainer` setup is due to the fact that the Spring Boot testing library does not
+   support **WireMock** out of the box. See also the [`OpenWeatherMapAware`][OpenWeatherMapAware] interface, used for generic
    `@DynamicPropertySource` of `openweathermap.api.url` to point to **WireMock**.
-3. See [`WeatherProcessorImplTest`][WeatherProcessorImplTest] test class to see how both **WireMock** and **MongoDB** is
+3. See the [`WeatherProcessorImplTest`][WeatherProcessorImplTest] class to see how both **WireMock** and **MongoDB** are
    used in tests.
 
-   Note that for MongoDB this test don't do anything, but [`OpenWeatherMapAware`][OpenWeatherMapAware] interface is
+   Note that for MongoDB this test doesn't do anything, but the [`OpenWeatherMapAware`][OpenWeatherMapAware] interface is
    used explicitly.
 4. See [`docker-compose.yaml`][docker-compose.yaml] to see how **MongoDB** and **WireMock** were launched for local
    development. **Note** that **WireMock** allows static files loaded as Docker volumes for mock mappings.
