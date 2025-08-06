@@ -1,12 +1,16 @@
+import com.diffplug.spotless.LineEnding
+
 plugins {
     id "java"
     id "org.springframework.boot" version "3.5.3"
     id "io.spring.dependency-management" version "1.1.7"
     id "com.diffplug.spotless" version "7.1.0"
+    id "net.nemerosa.versioning" version "3.1.0"
 }
 
 group = "io.github.malczuuu"
-version = "1.0.0-SNAPSHOT"
+version = (versioning.info.tag ?: "${versioning.info.lastTag}-${versioning.info.build}") \
+           + (versioning.info.dirty ? "-dirty" : "")
 
 java {
     toolchain {
@@ -58,7 +62,8 @@ spotless {
     java {
         target "src/**/*.java"
 
-        googleJavaFormat("1.27.0")
+        googleJavaFormat("1.28.0")
+        lineEndings = LineEnding.UNIX
     }
 }
 
