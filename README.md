@@ -1,5 +1,8 @@
 # 🌦️ Weather Storage 🌦️
 
+[![Build Status](https://github.com/malczuuu/weather-storage/actions/workflows/gradle.yml/badge.svg)](https://github.com/malczuuu/weather-storage/actions/workflows/gradle.yml)
+[![Weekly Build Status](https://github.com/malczuuu/weather-storage/actions/workflows/gradle-weekly.yml/badge.svg)](https://github.com/malczuuu/weather-storage/actions/workflows/gradle-weekly.yml)
+
 A simple [**Spring Boot**][spring-boot] application that periodically fetches weather data from
 [**OpenWeatherMap**][openweathermap] and stores it in [**MongoDB**][mongo].
 
