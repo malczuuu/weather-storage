@@ -9,6 +9,14 @@ plugins {
 
 group = "io.github.malczuuu"
 
+/**
+ * Conditional approach to versioning. If `-Pversion=...` is specified on the command line, it will be used as the
+ * version. Otherwise, the version is derived from the git tag and build number.
+ */
+if (version == null || version == "unspecified") {
+    version = Versioning.getSnapshotVersion(rootProject.rootDir)
+}
+
 java {
     toolchain {
         languageVersion = JavaLanguageVersion.of(21)
@@ -61,6 +69,12 @@ spotless {
 
         googleJavaFormat("1.28.0")
         lineEndings = LineEnding.UNIX
+    }
+}
+
+tasks.register("printVersion") {
+    doLast {
+        println "Project version: ${version}"
     }
 }
 
